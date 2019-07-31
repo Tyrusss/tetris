@@ -270,7 +270,7 @@ class Piece {
             }
         }
 
-        for(r=19;r>=0;r--) {
+        for(r=0;r<ROW-1;r++) {
             let isRowFull = true;
             for(c=0;c<COLUMN;c++) {
                 isRowFull = isRowFull && (board[r][c] != VACANT);
