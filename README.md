@@ -1,1 +1,1 @@
-It's just tetris.
+It's just tetris
