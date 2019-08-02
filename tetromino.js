@@ -211,26 +211,27 @@ class Piece {
     }
     moveLeft() {
         if(! this.willCollide(-1, 0, this.activeTetromino)) {
-            piece.undraw();
-            piece.x--;
-            piece.draw();
+            this.undraw();
+            this.x--;
+            this.draw();
         }
     }
     moveRight() {
         if(! this.willCollide(1, 0, this.activeTetromino)) {
-            piece.undraw();
-            piece.x++;
-            piece.draw();
+            this.undraw();
+            this.x++;
+            this.draw();
         }
     }
     moveDown() {
         if(! this.willCollide(0, 1, this.activeTetromino)) {
-            piece.undraw();
-            piece.y++;
-            piece.draw();
+            this.undraw();
+            this.y++;
+            this.draw();
         } else {
             this.lock();
-            piece = randomPiece();
+            drawBoard();
+            piece = randomPiece(randomN);
         }
     }
     rotate() {
@@ -242,12 +243,12 @@ class Piece {
         }
 
         if(! this.willCollide(kick, 0, nextPattern)) {
-            piece.undraw();
-            piece.x += kick;
+            this.undraw();
+            this.x += kick;
             this.tetrominoN++;
             if(this.tetrominoN == 4) { this.tetrominoN = 0 };
             this.activeTetromino = nextPattern
-            piece.draw();
+            this.draw();
         }
     }
     lock() {
@@ -267,6 +268,7 @@ class Piece {
                     drawBoard();
                 }
                 board[this.y + r][this.x + c] = this.colour;
+                drawBoard();
             }
         }
 
@@ -290,9 +292,45 @@ class Piece {
     }
 }
 
-function randomPiece() {
-    let randomN = Math.floor(Math.random() * Piece_Table.length);
-    return new Piece(Piece_Table[randomN][0], Piece_Table[randomN][1]);
+function randomPiece(nextPieceN) {
+    drawBoard();
+    randomN = Math.floor(Math.random() * Piece_Table.length);
+    displayedPiece = new Piece(Piece_Table[randomN][0], Piece_Table[randomN][1]);
+
+    switch(displayedPiece.tetromino) {
+        case Z:
+            displayedPiece.x = 13.5;
+            displayedPiece.y = 8;
+            break;
+        case S:
+            displayedPiece.x = 13.5;
+            displayedPiece.y = 8;
+            break;
+        case J:
+            displayedPiece.x = 13.5;
+            displayedPiece.y = 7.7;
+            break;
+        case T:
+            displayedPiece.x = 13.5;
+            displayedPiece.y = 7.2;
+            break;
+        case L:
+            displayedPiece.x = 13.25;
+            displayedPiece.y = 7.5;
+            break;
+        case I:
+            displayedPiece.x = 13.5;
+            displayedPiece.y = 7;
+            break;
+        case O:
+            displayedPiece.x = 13;
+            displayedPiece.y = 7;
+            break;
+    }
+
+    displayedPiece.draw();
+
+    return new Piece(Piece_Table[nextPieceN][0], Piece_Table[nextPieceN][1]);
 }
 
 document.addEventListener("keydown", keyPush);
@@ -324,7 +362,8 @@ function drop() {
 }
 
 window.onload=function() {
-    piece = randomPiece();
+    pieceN = Math.floor(Math.random() * Piece_Table.length);
+    piece = randomPiece(pieceN);
     piece.draw();
     drop();
 }
