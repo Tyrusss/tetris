@@ -292,45 +292,48 @@ class Piece {
     }
 }
 
-function randomPiece(nextPieceN) {
-    drawBoard();
+function randomPiece(pieceN) {
     randomN = Math.floor(Math.random() * Piece_Table.length);
-    displayedPiece = new Piece(Piece_Table[randomN][0], Piece_Table[randomN][1]);
+    let nextPiece = new Piece(Piece_Table[randomN][0], Piece_Table[randomN][1]);
 
-    switch(displayedPiece.tetromino) {
+    switch(nextPiece.tetromino) {
         case Z:
-            displayedPiece.x = 13.5;
-            displayedPiece.y = 8;
+            nextPiece.x = 13.5;
+            nextPiece.y = 8;
             break;
         case S:
-            displayedPiece.x = 13.5;
-            displayedPiece.y = 8;
+            nextPiece.x = 13.5;
+            nextPiece.y = 8;
             break;
         case J:
-            displayedPiece.x = 13.5;
-            displayedPiece.y = 7.7;
+            nextPiece.x = 13.7;
+            nextPiece.y = 7.7;
             break;
         case T:
-            displayedPiece.x = 13.5;
-            displayedPiece.y = 7.2;
+            nextPiece.x = 13.5;
+            nextPiece.y = 7.2;
             break;
         case L:
-            displayedPiece.x = 13.25;
-            displayedPiece.y = 7.5;
+            nextPiece.x = 13.25;
+            nextPiece.y = 7.5;
             break;
         case I:
-            displayedPiece.x = 13.5;
-            displayedPiece.y = 7;
+            nextPiece.x = 13.5;
+            nextPiece.y = 7;
             break;
         case O:
-            displayedPiece.x = 13;
-            displayedPiece.y = 7;
+            nextPiece.x = 13;
+            nextPiece.y = 7;
             break;
     }
 
-    displayedPiece.draw();
+    ctx.fillstyle = "white";
+    ctx.fillRect(13*SQ, 7*SQ, 4*SQ, 4*SQ);
+    ctx.strokeStyle = "black";
+    ctx.strokeRect(13*SQ, 7*SQ, 4*SQ, 4*SQ);
+    nextPiece.draw();
 
-    return new Piece(Piece_Table[nextPieceN][0], Piece_Table[nextPieceN][1]);
+    return new Piece(Piece_Table[pieceN][0], Piece_Table[pieceN][1]);
 }
 
 document.addEventListener("keydown", keyPush);

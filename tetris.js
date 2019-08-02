@@ -29,8 +29,8 @@ function drawBoard() {
             drawSquare(c, r, board[r][c])
         }
     }
-    ctx.fillstyle = VACANT;
-    ctx.fillRect(13*SQ, 7*SQ, 4*SQ, 4*SQ);
+    ctx.fillStyle = "white";
+    ctx.fillRect(13*SQ, 7*SQ, 4*SQ, 4*SQ)
     ctx.strokeStyle = "black";
     ctx.strokeRect(13*SQ, 7*SQ, 4*SQ, 4*SQ);
 }
